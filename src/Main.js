@@ -7,6 +7,7 @@ import Cart from "./component/cart/Cart";
 import NotFound from "./component/ui/NotFound";
 import Dashboard from "./component/user/Dashboard";
 import useAuth from "./hooks/useAuth";
+import NewPasswordLandingPage from "./component/Auth/reset/NewPasswordLandingPage";
 const Main = () => {
     return (
         <Routes>
@@ -14,6 +15,7 @@ const Main = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forget-password" element={<ResetPassword />} />
+            <Route path="/new-password" element={<NewPasswordLandingPage />} />
             <Route path="/cart" element={<Cart />} />
             {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />
