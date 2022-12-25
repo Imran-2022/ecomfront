@@ -8,13 +8,13 @@ const Layout = ({ title = "Title", className, children }) => {
     }, [title])
 
     return (
-        <>
+        <div>
             <MenuBar />
             <div className={className}>
                 {children}
             </div>
             <Footer/>
-        </>
+        </div>
     );
 };
 
