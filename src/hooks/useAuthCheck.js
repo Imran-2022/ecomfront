@@ -1,3 +1,5 @@
+import jwt_decode from 'jwt-decode'
+
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../features/auth/authSlice";
@@ -10,11 +12,13 @@ export default function useAuthCheck() {
         const localAuth = localStorage?.getItem("auth");
         if (localAuth) {
             const auth = JSON.parse(localAuth);
-            if (auth?.accessToken && auth?.user) {
+            if (auth?.accessToken) {
+                const decoded= jwt_decode(auth?.accessToken);
+                const {email,name}=decoded;
                 dispatch(
                     userLoggedIn({
                         accessToken: auth.accessToken,
-                        user: auth.user,
+                        user: {email,name},
                     })
                 );
                 setAuthChecked(true);
