@@ -6,7 +6,7 @@ import youtube from '../../assets/images/youtube.svg'
 const Footer = () => {
     const year = new Date().getFullYear()
     return (
-        <footer className=" bg-gray-200 sm:p-6 dark:bg-gray-800">
+        <footer className=" border sm:p-6 dark:bg-gray-800">
             <div className="mx-auto max-w-screen-xl p-4">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {year} <a href="https://www.linkedin.com/in/md-imranul-haque/" className="hover:underline">Ecom™</a>. All Rights Reserved.
