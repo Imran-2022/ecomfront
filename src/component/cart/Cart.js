@@ -3,7 +3,7 @@ import Layout from '../../Layout';
 
 const Cart = () => {
     return (
-        <Layout>
+        <Layout title="cart Page" className=''>
             <section class="bg-white dark:bg-gray-900">
                 <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
                     <h2 class="mb-8 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900 lg:mb-16 dark:text-white md:text-4xl">You’ll be in good company</h2>

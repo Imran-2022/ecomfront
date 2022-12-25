@@ -4,7 +4,7 @@ import Layout from '../../../Layout';
 
 const Login = () => {
     return (
-        <Layout title="Home Page" className=''>
+        <Layout title="Login Page" className=''>
         <div class="flex flex-col items-center justify-center w-full h-screen bg-gray-200 text-gray-700">
             <form class="flex flex-col bg-white rounded shadow-lg p-12 mt-12" action="">
                 <label class="font-semibold text-xs" for="usernameField">Username or Email</label>
