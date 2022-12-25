@@ -6,25 +6,25 @@ import Error from '../../ui/Error';
 
 const Register = () => {
 
-    const [inputs,setInputs]=useState({
-        name:"",
-        email:"",
-        password:"",
-        comfirm_password:""
+    const [inputs, setInputs] = useState({
+        name: "",
+        email: "",
+        password: "",
+        comfirm_password: ""
     });
 
 
-    const handleChange=(e)=>{
+    const handleChange = (e) => {
         // setInputs()
         // e.target.propertyname(name) -> e.target.value.
-        setInputs((preValue)=>({...preValue,[e.target.name]:e.target.value}))
+        setInputs((preValue) => ({ ...preValue, [e.target.name]: e.target.value }))
     }
 
 
     const [agreed, setAgreed] = useState(false);
     const [error, setError] = useState("");
 
-    const [register, { data, isLoading, error: responseError }] =useRegisterMutation();
+    const [register, { data, isLoading, error: responseError }] = useRegisterMutation();
 
     const navigate = useNavigate();
 
@@ -45,11 +45,12 @@ const Register = () => {
         if (inputs.comfirm_password !== inputs.password) {
             setError("Passwords do not match");
         } else {
-            const {name,email,password}=inputs;
+            const { name, email, password } = inputs;
             register({
                 name,
                 email,
                 password,
+                isVerified: false
             });
         }
     };
@@ -67,15 +68,15 @@ const Register = () => {
 
                     <label className="font-semibold text-xs mt-3" htmlFor="useremailField">User Email</label>
 
-                    <input className="flex items-center h-12 px-4 w-64 border shadowmt-2 rounded focus:outline-none focus:ring-2" type="email" name="email" value={inputs.email} onChange={handleChange} required/>
+                    <input className="flex items-center h-12 px-4 w-64 border shadowmt-2 rounded focus:outline-none focus:ring-2" type="email" name="email" value={inputs.email} onChange={handleChange} required />
 
                     <label className="font-semibold text-xs mt-3" htmlFor="passwordField">Password</label>
 
-                    <input className="flex items-center h-12 px-4 w-64 border shadow mt-2 rounded focus:outline-none focus:ring-2" type="password" name="password" value={inputs.password} onChange={handleChange} required/>
+                    <input className="flex items-center h-12 px-4 w-64 border shadow mt-2 rounded focus:outline-none focus:ring-2" type="password" name="password" value={inputs.password} onChange={handleChange} required />
 
                     <label className="font-semibold text-xs mt-3" htmlFor="comfirm_passwordField">ComFirm Password</label>
 
-                    <input className="flex items-center h-12 px-4 w-64 border shadow mt-2 rounded focus:outline-none focus:ring-2" type="password" name="comfirm_password" value={inputs.comfirm_password} onChange={handleChange} required/>
+                    <input className="flex items-center h-12 px-4 w-64 border shadow mt-2 rounded focus:outline-none focus:ring-2" type="password" name="comfirm_password" value={inputs.comfirm_password} onChange={handleChange} required />
 
                     <button className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Register</button>
 

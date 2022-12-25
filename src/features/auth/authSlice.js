@@ -13,8 +13,8 @@ const authSlice = createSlice({
         userLoggedIn: (state, action) => {
             state.accessToken = action.payload.accessToken;
             const decoded = jwt_decode(action.payload.accessToken);
-            const { email, name, role } = decoded;
-            state.user = {email, name, role};
+            const { email, name, role, isVerified } = decoded;
+            state.user = { email, name, role, isVerified };
         },
         userLoggedOut: (state) => {
             state.accessToken = undefined;
