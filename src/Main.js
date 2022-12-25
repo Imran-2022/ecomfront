@@ -7,7 +7,6 @@ import Cart from "./component/cart/Cart";
 import Dashboard from "./component/dashboard/Dashboard";
 import NotFound from "./component/ui/NotFound";
 const Main = () => {
-
     return (
         <Routes>
             <Route path="/" element={<Home />}/>

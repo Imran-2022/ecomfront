@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../../../features/auth/authApi';
 import Layout from '../../../Layout';
+import Error from '../../ui/Error';
 
 const Register = () => {
 
@@ -18,17 +20,46 @@ const Register = () => {
         setInputs((preValue)=>({...preValue,[e.target.name]:e.target.value}))
     }
 
+
+    const [agreed, setAgreed] = useState(false);
+    const [error, setError] = useState("");
+
+    const [register, { data, isLoading, error: responseError }] =useRegisterMutation();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (responseError?.data) {
+            setError(responseError.data);
+        }
+        if (data?.token && data?.user) {
+            navigate("/");
+        }
+    }, [data, responseError, navigate]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setError("");
+
+        if (inputs.comfirm_password !== inputs.password) {
+            setError("Passwords do not match");
+        } else {
+            const {name,email,password}=inputs;
+            register({
+                name,
+                email,
+                password,
+            });
+        }
+    };
+
     return (
         <Layout title="Register Page" className=''>
 
             <div className="flex flex-col items-center justify-center w-full h-full py-11  text-gray-700">
 
-                <form className="flex flex-col bg-white rounded shadow-lg p-12 my-12" action="" onSubmit={(e)=>
-                {
-                    e.preventDefault();
-                    console.log(inputs)
-
-                }}>
+                <form className="flex flex-col bg-white rounded shadow-lg p-12 my-12" action="" onSubmit={handleSubmit}>
 
                     <label className="font-semibold text-xs" htmlFor="usernameField">User name</label>
 
@@ -53,6 +84,7 @@ const Register = () => {
                         <span className="mx-2 text-gray-300">/</span>
                         <Link to="/login" className="text-blue-400 hover:text-blue-500" href="#">Login</Link>
                     </div>
+                    {error !== "" && <Error message={error} />}
                 </form>
             </div>
         </Layout>

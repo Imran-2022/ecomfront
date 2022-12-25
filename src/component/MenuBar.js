@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import { userLoggedOut } from '../features/auth/authSlice';
 
 const MenuBar = () => {
+
     const [menuShow, setMenuShow] = useState(false)
     const handleMenuShow = () => {
         setMenuShow(!menuShow)
     }
+
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(userLoggedOut());
+        localStorage.clear();
+    };
+
     return (
         <div>
             <nav className="bg-white border-gray-200 lg:mx-60 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -38,6 +49,9 @@ const MenuBar = () => {
                             </li>
                             <li>
                                 <NavLink to={`/register`} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Register</NavLink>
+                            </li>
+                            <li>
+                                <span className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" onClick={logout}>LogOut</span>
                             </li>
                         </ul>
                     </div>
