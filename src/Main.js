@@ -5,6 +5,7 @@ import Home from "./component/Home/Home";
 import ResetPassword from "./component/Auth/reset/ResetPassword"
 import Cart from "./component/cart/Cart";
 import Dashboard from "./component/dashboard/Dashboard";
+import NotFound from "./component/ui/NotFound";
 const Main = () => {
 
     return (
@@ -15,6 +16,7 @@ const Main = () => {
             <Route path="/register" element={<Register/>}/>
             <Route path="/forget-password" element={<ResetPassword/>}/>
             <Route path="/cart" element={<Cart/>}/>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
     );
 };
