@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Footer from "./component/Footer/Footer";
 import MenuBar from "./component/MenuBar";
 
 const Layout = ({ title = "Title", className, children }) => {
@@ -12,6 +13,7 @@ const Layout = ({ title = "Title", className, children }) => {
             <div className={className}>
                 {children}
             </div>
+            <Footer/>
         </>
     );
 };
