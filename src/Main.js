@@ -16,7 +16,7 @@ const Main = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forget-password" element={<ResetPassword />} />
-            <Route path="/new-password" element={<NewPasswordLandingPage />} />
+            <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/cart" element={<Cart />} />
             {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />

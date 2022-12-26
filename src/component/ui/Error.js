@@ -3,7 +3,7 @@ import React from 'react';
 const Error = ({message}) => {
     return (
         <div>
-            <p>{message}</p>
+            <p className='text-red-500 font-bold'>{message}</p>
         </div>
     );
 };

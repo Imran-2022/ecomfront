@@ -79,7 +79,20 @@ export const authApi = apiSlice.injectEndpoints({
                 }
             },
         }),
+        resetEmail: builder.mutation({
+            query: (email) => ({
+                url: `/api/user/forgot-password/${email}`,
+                method: "PUT",
+            }),
+        }),
+        resetPassword: builder.mutation({
+            query: ({new_password,npassword}) => ({
+                url: `/api/user/${npassword}/reset-password`,
+                method: "PUT",
+                body: {new_password},
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation,useVerifyEmailMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyEmailMutation, useResetEmailMutation, useResetPasswordMutation } = authApi;
