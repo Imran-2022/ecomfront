@@ -40,7 +40,6 @@ export const authApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
-
                     localStorage.setItem(
                         "auth",
                         JSON.stringify({
@@ -59,7 +58,28 @@ export const authApi = apiSlice.injectEndpoints({
                 }
             },
         }),
+        verifyEmail: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/verify-email",
+                method: "PUT",
+                body: data,
+            }),
+
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    localStorage.setItem(
+                        "auth",
+                        JSON.stringify({
+                            accessToken: result.data.token
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation,useVerifyEmailMutation } = authApi;

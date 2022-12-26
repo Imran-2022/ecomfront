@@ -8,6 +8,7 @@ import NotFound from "./component/ui/NotFound";
 import Dashboard from "./component/user/Dashboard";
 import useAuth from "./hooks/useAuth";
 import NewPasswordLandingPage from "./component/Auth/reset/NewPasswordLandingPage";
+import { EmailVerificationLandingPage } from "./component/Auth/verify/EmailVerificationLandingPage";
 const Main = () => {
     return (
         <Routes>
@@ -20,6 +21,7 @@ const Main = () => {
             {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />
             }
+             <Route path="/verify-email/:verificationString" element={<EmailVerificationLandingPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

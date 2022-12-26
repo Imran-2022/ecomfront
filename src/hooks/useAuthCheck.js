@@ -7,7 +7,6 @@ import { userLoggedIn, userLoggedOut } from "../features/auth/authSlice";
 export default function useAuthCheck() {
     const dispatch = useDispatch();
     const [authChecked, setAuthChecked] = useState(false);
-
     useEffect(() => {
         const localAuth = localStorage?.getItem("auth");
         if (localAuth) {
@@ -15,7 +14,7 @@ export default function useAuthCheck() {
             if (auth?.accessToken) {
                 const decoded = jwt_decode(auth?.accessToken);
                 const { email, name, exp } = decoded;
-
+                
                 // (new Date).getTime() -> time in millisecond.
                 // return (new Date).getTime()<exp*1000// becasue exp in second . 
 

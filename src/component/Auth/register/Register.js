@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../../features/auth/authApi';
 import Layout from '../../../Layout';
 import Error from '../../ui/Error';
-
+import { v4 as uuid } from 'uuid'
 const Register = () => {
-
+    const verificationString = uuid()
     const [inputs, setInputs] = useState({
         name: "",
         email: "",
@@ -38,6 +38,7 @@ const Register = () => {
     }, [data, responseError, navigate]);
 
     const handleSubmit = (e) => {
+        console.log(verificationString);
         e.preventDefault();
 
         setError("");
@@ -50,7 +51,8 @@ const Register = () => {
                 name,
                 email,
                 password,
-                isVerified: false
+                isVerified: false,
+                verificationString
             });
         }
     };
