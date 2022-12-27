@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Layout from '../../Layout';
+import { useGetCategoryMutation } from '../../features/product/adminAPI';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
     const auth = useSelector((state) => state.auth);
+
+    const [getCategory, { data, isLoading, error: responseError, isSuccess }] = useGetCategoryMutation();
+
+    useEffect(()=>{
+        getCategory()
+    },[getCategory])
+
+    
     const { name, email, role } = auth?.user;
     const UserLinks = () => {
         return (
@@ -69,6 +79,12 @@ const Dashboard = () => {
         <Layout title="Dashboard" className="container-fluid">
             <div className="row">
                 <div className="col-sm-3">
+                <button className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700" ><Link to="/create-category">Create Category</Link></button>
+                <div className='p-12'>
+                {
+                    data && data.map((dt,idx)=><p key={idx}>{dt?.name}</p>)
+                }
+                </div>
                     <UserLinks />
                 </div>
                 <div className="col-sm-9">
