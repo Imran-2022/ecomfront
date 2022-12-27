@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { addCategory } from "./AdminSlice";
+import { addCategory,addProductToState } from "./AdminSlice";
 
 export const adminAPI = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -32,7 +32,29 @@ export const adminAPI = apiSlice.injectEndpoints({
                 body: data,
             })
         }),
+        getProducts: builder.mutation({
+            query: ({sortBy,order,limit}) => ({
+                url: `/api/product?sortBy=${sortBy}&order=${order}&limit=${limit}`,
+                method: "GET",
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(addProductToState(result?.data))
+
+                } catch (err) {
+                    // do nothing
+                }
+            },
+        }),
+        getProduct: builder.mutation({
+            query: (id) => ({
+                url: `/api/product/${id}`,
+                method: "GET",
+            }),
+        })
     }),
+    
 });
 
-export const { useCreateCategoryMutation,useGetCategoryMutation,useCreateProductsMutation } = adminAPI;
+export const { useCreateCategoryMutation,useGetCategoryMutation,useCreateProductsMutation,useGetProductsMutation,useGetProductMutation } = adminAPI;

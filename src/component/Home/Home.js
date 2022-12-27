@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../../Layout';
 import homecover from "../../assets/images/homecover.png"
+import ShowProduct from './ShowProduct';
 
 const Home = () => {
 
@@ -27,6 +28,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            <ShowProduct/>
         </Layout>
     );
 };

@@ -12,6 +12,7 @@ import { EmailVerificationLandingPage } from "./component/Auth/verify/EmailVerif
 import { PleaseVerifyEmailPage } from "./component/Auth/verify/PleaseVerifyEmail";
 import CreateCategory from "./component/product/CreateCategory"
 import CreateProduct from "./component/product/CreateProduct";
+import ProductDetails from "./component/Home/ProductDetails";
 const Main = () => {
     return (
         <Routes>
@@ -22,6 +23,7 @@ const Main = () => {
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
             <Route path="/create-category" element={<CreateCategory />} />
+            <Route path="/product/:dt" element={<ProductDetails />} />
             <Route path="/create-product" element={<CreateProduct />} />
             <Route path="/cart" element={<Cart />} />
             {
