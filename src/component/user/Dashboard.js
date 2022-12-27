@@ -80,6 +80,7 @@ const Dashboard = () => {
             <div className="row">
                 <div className="col-sm-3">
                 <button className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700" ><Link to="/create-category">Create Category</Link></button>
+                <button className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700" ><Link to="/create-product">Create Product</Link></button>
                 <div className='p-12'>
                 {
                     data && data.map((dt,idx)=><p key={idx}>{dt?.name}</p>)

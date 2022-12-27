@@ -11,6 +11,7 @@ import NewPasswordLandingPage from "./component/Auth/reset/NewPasswordLandingPag
 import { EmailVerificationLandingPage } from "./component/Auth/verify/EmailVerificationLandingPage";
 import { PleaseVerifyEmailPage } from "./component/Auth/verify/PleaseVerifyEmail";
 import CreateCategory from "./component/product/CreateCategory"
+import CreateProduct from "./component/product/CreateProduct";
 const Main = () => {
     return (
         <Routes>
@@ -21,6 +22,7 @@ const Main = () => {
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
             <Route path="/create-category" element={<CreateCategory />} />
+            <Route path="/create-product" element={<CreateProduct />} />
             <Route path="/cart" element={<Cart />} />
             {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />

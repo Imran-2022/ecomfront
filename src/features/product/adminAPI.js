@@ -25,62 +25,14 @@ export const adminAPI = apiSlice.injectEndpoints({
                 }
             },
         }),
-        login: builder.mutation({
+        createProducts: builder.mutation({
             query: (data) => ({
-                url: "/api/user/sign-in",
+                url: "/api/product",
                 method: "POST",
                 body: data,
-            }),
-
-            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                try {
-                    const result = await queryFulfilled;
-                    localStorage.setItem(
-                        "auth",
-                        JSON.stringify({
-                            accessToken: result.data.token
-                        })
-                    );
-                } catch (err) {
-                    // do nothing
-                }
-            },
-        }),
-        verifyEmail: builder.mutation({
-            query: (data) => ({
-                url: "/api/user/verify-email",
-                method: "PUT",
-                body: data,
-            }),
-
-            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                try {
-                    const result = await queryFulfilled;
-                    localStorage.setItem(
-                        "auth",
-                        JSON.stringify({
-                            accessToken: result.data.token
-                        })
-                    );
-                } catch (err) {
-                    // do nothing
-                }
-            },
-        }),
-        resetEmail: builder.mutation({
-            query: (email) => ({
-                url: `/api/user/forgot-password/${email}`,
-                method: "PUT",
-            }),
-        }),
-        resetPassword: builder.mutation({
-            query: ({new_password,npassword}) => ({
-                url: `/api/user/${npassword}/reset-password`,
-                method: "PUT",
-                body: {new_password},
-            }),
+            })
         }),
     }),
 });
 
-export const { useCreateCategoryMutation,useGetCategoryMutation } = adminAPI;
+export const { useCreateCategoryMutation,useGetCategoryMutation,useCreateProductsMutation } = adminAPI;
