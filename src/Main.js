@@ -10,6 +10,7 @@ import useAuth from "./hooks/useAuth";
 import NewPasswordLandingPage from "./component/Auth/reset/NewPasswordLandingPage";
 import { EmailVerificationLandingPage } from "./component/Auth/verify/EmailVerificationLandingPage";
 import { PleaseVerifyEmailPage } from "./component/Auth/verify/PleaseVerifyEmail";
+import CreateCategory from "./component/product/CreateCategory"
 const Main = () => {
     return (
         <Routes>
@@ -19,6 +20,7 @@ const Main = () => {
             <Route path="/forget-password" element={<ResetPassword />} />
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
+            <Route path="/create-category" element={<CreateCategory />} />
             <Route path="/cart" element={<Cart />} />
             {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />
