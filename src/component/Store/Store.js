@@ -4,7 +4,7 @@ import Products from './Products';
 
 const Store = () => {
     return (
-        <Layout title='Stoer' className="h-screen mx-14">
+        <Layout title='Store' className="h-screen mx-14">
             <p>welcome to Store !</p>
             <Products/>
         </Layout>

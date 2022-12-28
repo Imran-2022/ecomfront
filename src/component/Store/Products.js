@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { json, Link } from 'react-router-dom';
 import { useGetProductsMutation } from '../../features/product/adminAPI';
 import ProductsCard from '../card/ProductsCard';
 import FilterProduct from './FilterProduct';
@@ -13,7 +14,31 @@ const Products = () => {
     useEffect(() => {
         getProducts({ sortBy, order, limit })
     }, [sortBy, order, limit, getProducts])
-    if (data) console.log(data)
+    
+    const {search,filterPrice,filterCategory}= useSelector(state =>state.filter)
+
+    const searchFilter=(data)=>{
+        if(search){
+          return  data.name.includes(search)
+        }else{
+            return true;
+        }
+    }
+    const byPriceRange=(data)=>{
+        if(filterPrice){
+            return data.price<=filterPrice
+        }else {
+            return true;
+        }
+    }
+    const byCategory=(data)=>{
+        if(filterCategory){
+            return data.category._id==filterCategory
+        }else{
+            return true;
+        }
+    }
+
     return (
         <div className='m-12'>
             <p className='text-center'>Here ALL Products ! </p>
@@ -23,7 +48,11 @@ const Products = () => {
                <div className='col-span-4'>
                <div className='flex flex-wrap justify-center items-center gap-5'>
                     {
-                        data && data.map(dt => <ProductsCard dt={dt} />)
+                        data && data
+                        .filter(searchFilter)
+                        .filter(byPriceRange)
+                        .filter(byCategory)
+                        .map(dt => <ProductsCard key={dt._id} dt={dt} />)
                     }
                 </div>
                </div>
