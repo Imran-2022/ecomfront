@@ -1,12 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSearch,addFilterCategory,addFilterPrice } from '../../features/filter/filterSlice';
+import { clearFilter } from '../../features/filter/filterSlice';
 const ResetFilter = () => {
     const dispatch = useDispatch();
     const hanldeReset=()=>{
-        dispatch(addSearch(""))
-        dispatch(addFilterCategory(""))
-        dispatch(addFilterPrice(""))
+        dispatch(clearFilter())
     }
     return (
         <div>

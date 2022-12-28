@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { setTotalCount } from "../filter/filterSlice";
 import { addCategory,addProductToState } from "./AdminSlice";
 
 export const adminAPI = apiSlice.injectEndpoints({
@@ -33,8 +34,8 @@ export const adminAPI = apiSlice.injectEndpoints({
             })
         }),
         getProducts: builder.mutation({
-            query: ({sortBy,order,limit}) => ({
-                url: `/api/product?sortBy=${sortBy}&order=${order}&limit=${limit}`,
+            query: ({sortBy,order,currentPage,limit}) => ({
+                url: `/api/product?sortBy=${sortBy}&order=${order}&currentPage=${currentPage}&limit=${limit}`,
                 method: "GET",
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
@@ -52,9 +53,24 @@ export const adminAPI = apiSlice.injectEndpoints({
                 url: `/api/product/${id}`,
                 method: "GET",
             }),
+        }),
+        getTotalOfProduct: builder.mutation({
+            query: () => ({
+                url: `/api/product/total`,
+                method: "GET",
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(setTotalCount(result?.data.total))
+
+                } catch (err) {
+                    // do nothing
+                }
+            },
         })
     }),
     
 });
 
-export const { useCreateCategoryMutation,useGetCategoryMutation,useCreateProductsMutation,useGetProductsMutation,useGetProductMutation } = adminAPI;
+export const { useCreateCategoryMutation,useGetCategoryMutation,useCreateProductsMutation,useGetProductsMutation,useGetProductMutation,useGetTotalOfProductMutation } = adminAPI;
