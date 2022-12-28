@@ -12,23 +12,31 @@ import { EmailVerificationLandingPage } from "./component/Auth/verify/EmailVerif
 import { PleaseVerifyEmailPage } from "./component/Auth/verify/PleaseVerifyEmail";
 import CreateCategory from "./component/product/CreateCategory"
 import CreateProduct from "./component/product/CreateProduct";
-import ProductDetails from "./component/Home/ProductDetails";
+import Store from "./component/Store/Store";
+import ProductCard from "./component/card/ProductCard";
+import About from "./component/about/About";
 const Main = () => {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/store" element={<Store />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
             <Route path="/forget-password" element={<ResetPassword />} />
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
-            <Route path="/create-category" element={<CreateCategory />} />
-            <Route path="/product/:dt" element={<ProductDetails />} />
-            <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/product/:dt" element={<ProductCard />} />
+            
             <Route path="/cart" element={<Cart />} />
-            {
+            <Route path="/dashboard" element={<Dashboard />}>
+            <Route index element={<CreateProduct />} />
+            <Route path="create-category" element={<CreateCategory />} />
+
+            </Route>
+            {/* {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />
-            }
+            } */}
              <Route path="/verify-email/:verificationString" element={<EmailVerificationLandingPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>

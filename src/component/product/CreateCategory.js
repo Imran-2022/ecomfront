@@ -13,8 +13,8 @@ const CreateCategory = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-screen bg-gray-200 text-gray-700">
-            <button className="flex items-center justify-center h-12 px-6 w-22 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"><Link to="/dashboard">Back to Dashboard</Link></button>
+        <div className="flex flex-col items-center justify-center w-full h-f  text-gray-700">
+        
             <form className="flex flex-col bg-white rounded shadow-lg p-12 my-12 " action="" onSubmit={handleSubmit}>
                 <label className="font-semibold text-xs" htmlFor="category">write category name</label>
 

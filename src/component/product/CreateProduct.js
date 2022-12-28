@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Layout from '../../Layout';
 import { useCreateProductsMutation, useGetCategoryMutation } from '../../features/product/adminAPI';
 
 const CreateProduct = () => {
@@ -125,7 +124,6 @@ const CreateProduct = () => {
 
 
     return (
-        <Layout title="Add a new product" className="p-4">
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {productForm()}
@@ -134,7 +132,6 @@ const CreateProduct = () => {
                     {ss&& <p>successfully uploaded bro</p>}
                 </div>
             </div>
-        </Layout>
     );
 
 }
