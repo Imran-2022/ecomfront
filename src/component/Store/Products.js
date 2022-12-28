@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTotalCount,setPage} from '../../features/filter/filterSlice';
+import { setTotalCount, setPage } from '../../features/filter/filterSlice';
 import { useGetProductsMutation, useGetTotalOfProductMutation } from '../../features/product/adminAPI';
 import ProductsCard from '../card/ProductsCard';
 import Pagination from '../ui/Pagination';
 import FilterProduct from './FilterProduct';
 
 const Products = () => {
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const [getProducts, { data, isLoading, error: responseError, isSuccess }] = useGetProductsMutation();
-    const [getTotalOfProduct, {data:TotalData  }] = useGetTotalOfProductMutation();
-    const { search, filterPrice, filterCategory,pagination } = useSelector(state => state.filter)
-    const {currentPage,limit}=pagination;
+    const [getTotalOfProduct, { data: TotalData }] = useGetTotalOfProductMutation();
+    const { search, filterPrice, filterCategory, pagination } = useSelector(state => state.filter)
+    const { currentPage, limit } = pagination;
     const [order, setOrder] = useState('desc')
     const [sortBy, setSortBy] = useState('createAt')
     useEffect(() => {
-        getProducts({ sortBy, order,currentPage,limit  })
+        getProducts({ sortBy, order, currentPage, limit })
         getTotalOfProduct()
-    }, [sortBy, order, getProducts,limit,currentPage])
+    }, [sortBy, order, getProducts])
 
-   
+
 
     const searchFilter = (data) => {
         if (search) {
@@ -45,7 +45,13 @@ const Products = () => {
     // useEffect(()=>{
     //     dispatch(setTotalCount(data?.length))
     // },[data,dispatch])
-   
+
+    const modifiedData = data && data.filter(searchFilter).filter(byPriceRange).filter(byCategory)
+    const modifiedDataa = data && data.filter(searchFilter).filter(byPriceRange).filter(byCategory).slice((currentPage - 1) * limit, (currentPage * limit))
+    useEffect(() => {
+        if (modifiedData) dispatch(setTotalCount(modifiedData?.length))
+    }, [modifiedData, dispatch])
+
     return (
         <div className='m-12'>
             <p className='text-center text-red-300 font-bold py-4 mb-4 bg-green-600'>Here ALL Products = {TotalData?.total} </p>
@@ -55,11 +61,7 @@ const Products = () => {
                 <div className='col-span-4'>
                     <div className='flex flex-wrap justify-center items-center gap-5'>
                         {
-                            data && data
-                                .filter(searchFilter)
-                                .filter(byPriceRange)
-                                .filter(byCategory)
-                                .map(dt => <ProductsCard key={dt._id} dt={dt} />)
+                            modifiedDataa?.map(dt => <ProductsCard key={dt._id} dt={dt} />)
                         }
                     </div>
                 </div>
