@@ -73,7 +73,7 @@ const Cart = () => {
                             }
 
                             {
-                                data && data.map((dt, idx) => <CartItem key={idx} dt={dt} />)
+                                cart && cart.map((dt, idx) => <CartItem key={idx} dt={dt} />)
                             }
 
 

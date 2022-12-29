@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useUpdateCartItemMutation } from '../../features/cart/cartApi';
-import { decrementQuantity, incrementQuantity } from '../../features/cart/cartSlice';
+import { useDeleteCartItemMutation, useUpdateCartItemMutation } from '../../features/cart/cartApi';
+import { decrementQuantity, incrementQuantity, removeItem } from '../../features/cart/cartSlice';
 
 const CartItem = ({ dt }) => {
     const [updateCartItem, { data, isLoading, error: responseError, isSuccess }] = useUpdateCartItemMutation()
+    const [deleteCartItem,{data:deleteData}]=useDeleteCartItemMutation()
     const { count, product: { name, _id }, price, category,_id:thatStheId } = dt;
     const [counting, setCounting] = useState(count || 1)
     const dispatch=useDispatch();
@@ -28,6 +29,19 @@ const CartItem = ({ dt }) => {
         dispatch(decrementQuantity(thatStheId))
     }
 
+    // remove items ------
+
+    const handleRemoveItem =()=>{
+        if(!window.confirm("are you sure")) return;
+        deleteCartItem(thatStheId);
+    }
+
+    useEffect(()=>{
+        if(deleteData) {
+            dispatch(removeItem(thatStheId))
+        }
+    },[deleteData,dispatch,thatStheId])
+
     return (
         <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
             <div className="flex w-2/5">
@@ -38,7 +52,7 @@ const CartItem = ({ dt }) => {
                 <div className="flex flex-col justify-between ml-4 flex-grow">
                     <span className="font-bold text-sm">{name}</span>
                     <span className="text-red-500 text-xs">{category}</span>
-                    <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+                    <span className="cursor-pointer underline font-semibold hover:text-red-500 text-gray-500 text-xs" onClick={handleRemoveItem}>Remove</span>
                 </div>
             </div>
             <div className="flex justify-center w-1/5">

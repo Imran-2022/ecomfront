@@ -9,16 +9,14 @@ export const cartApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            // async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-            //     try {
-            //         const result = await queryFulfilled;
-            //         dispatch(addToCart(result?.data))
-
-            //     } catch (err) {
-            //         // do nothing
-            //     }
-            // },
         }),
+        deleteCartItem: builder.mutation({
+            query: (id) => ({
+                url: `/api/cart/${id}`,
+                method: "DELETE",
+            }),
+        }),
+       
         getCartItem: builder.mutation({
             query: () => ({
                 url: "/api/cart",
@@ -53,8 +51,9 @@ export const cartApi = apiSlice.injectEndpoints({
                 }
             },
         }),
+        
     }),
     
 });
 
-export const { useAddToCarttMutation,useGetCartItemMutation,useUpdateCartItemMutation } = cartApi;
+export const { useAddToCarttMutation,useGetCartItemMutation,useUpdateCartItemMutation,useDeleteCartItemMutation } = cartApi;
