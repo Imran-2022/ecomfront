@@ -5,6 +5,7 @@ import { cartReducer } from "../features/cart/cartSlice";
 import filterSlice from "../features/filter/filterSlice";
 import adminSliceReducer from "../features/product/AdminSlice"
 import { profileReducer } from "../features/profile/profileSlice";
+import { paymentReducer } from "../features/payment/paymentSlice";
 export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
@@ -12,7 +13,8 @@ export const store = configureStore({
         admin:adminSliceReducer,
         filter:filterSlice,
         cart:cartReducer,
-        profile:profileReducer
+        profile:profileReducer,
+        payment:paymentReducer
     },
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddlewares) =>

@@ -1,7 +1,32 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { loadStripe} from '@stripe/stripe-js';
+import {Elements } from '@stripe/react-stripe-js'
 import Layout from '../../Layout';
+import CheckoutFrom from './CheckoutFrom';
+const stripePromise = loadStripe('pk_test_51LQPBwIORs89t3JLek7c1o26vLIUfnfMApeyywBC1BVsvxzr6i8hPiY9gZWbd66a3OEXQI4E7kuEjppB1H1Dv3xj00QJsLwfgm');
 
 const Checkout = () => {
+	const { cart, promoCode } = useSelector((state) => state.cart);
+
+
+	//  get total product count 
+
+	const getTotalQuantity = () => {
+		let total = 0
+		cart.forEach(item => {
+			total += Number(item.count)
+		})
+		return total
+	}
+	// Get Total .... 
+	const getTotalCost = () => {
+		let total = cart.map(dt => dt.price * dt.count).reduce((a, b) => a + b, 0)
+		if (promoCode == "2023") {
+			return Math.ceil(total * 0.9)
+		}
+		return Math.ceil(total)
+	}
 	return (
 		<Layout title="checkout page" className="mx-64 my-20">
 
@@ -40,14 +65,11 @@ const Checkout = () => {
 					<div className="bg-white rounded mt-4 shadow-lg py-6">
 						<div className="px-8">
 							<div className="flex items-end">
-								<select className="text-sm font-medium focus:outline-none -ml-1" name="" id="">
-									<option value="">Product (Billed Monthly)</option>
-									<option value="">Product (Billed Annually)</option>
-								</select>
-								<span className="text-sm ml-auto font-semibold">$20</span>
+								<p className='"text-sm font-medium focus:outline-none -ml-1" '>Product</p>
+								<span className="text-sm ml-auto font-semibold">${getTotalCost()}</span>
 								<span className="text-xs text-gray-500 mb-px">/mo</span>
 							</div>
-							<span className="text-xs text-gray-500 mt-2">Save 20% with annual billing</span>
+							<span className="text-xs text-gray-500 mt-2">total <span className='text-red-700 font-bold'>{getTotalQuantity()}</span> product you chose.</span>
 						</div>
 						<div className="px-8 mt-4">
 							<div className="flex items-end justify-between">
@@ -69,6 +91,12 @@ const Checkout = () => {
 						<div className="flex flex-col px-8 pt-4">
 							<button className="flex items-center justify-center bg-blue-600 text-sm font-medium w-full h-10 rounded text-blue-50 hover:bg-blue-700">Make Payment !</button>
 							{/* <button className="text-xs text-blue-500 mt-3 underline">Have a coupon code?</button> */}
+
+							{/* payment */}
+
+							<Elements stripe={stripePromise}>
+								<CheckoutFrom getTotalCost={getTotalCost()} />
+							</Elements>
 						</div>
 					</div>
 				</div>
