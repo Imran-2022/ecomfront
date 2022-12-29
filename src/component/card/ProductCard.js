@@ -1,17 +1,29 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useAddToCarttMutation } from '../../features/cart/cartApi';
 import { useGetProductMutation } from '../../features/product/adminAPI';
-import { addCategory } from '../../features/product/AdminSlice';
 import Layout from '../../Layout';
 
 const ProductCard = () => {
+    const dispatch=useDispatch()
+    const {user} = useSelector((state) => state.auth);
     const { dt } = useParams()
-    const [getProduct, { data, isLoading, error: responseError, isSuccess }] = useGetProductMutation()
+    const [getProduct, { data, isLoading, error: responseError, isSuccess }] = useGetProductMutation();
+    const [addToCart, { data:cartD, isLoading:isloadingd, error: responseErrorr, isSuccess:sd}] = useAddToCarttMutation();
     useEffect(() => {
         getProduct(dt)
     }, [])
-    if (data) console.log(data)
     const { _id: id,name, description,price,category,quantity } = data || {};
+    const handleAddToCart=(data)=>{
+   data&& addToCart({
+        user:user._id,
+        product:id,
+        price:price,
+        category:category.name,
+    })
+    }
+
 
     return (
         <Layout title="product Details page" className="mx-64 py-12 min-h-[90vh]">
@@ -27,7 +39,7 @@ const ProductCard = () => {
                     <p>DESCRIPTION : {description}</p>
                     <p>CATEGORY : {category?.name}</p>
                     <p>QUANTITY : {quantity}</p>
-                    <button className='p-2 bg-black text-white'>Add to Cart</button>
+                    <button className='p-2 bg-black text-white' onClick={()=>handleAddToCart(data)}>Add to Cart</button>
                 </div>
             </div>
         </Layout>

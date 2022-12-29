@@ -14,7 +14,7 @@ export default function useAuthCheck() {
             if (auth?.accessToken) {
                 const decoded = jwt_decode(auth?.accessToken);
                 const { email, name, exp } = decoded;
-                
+                // console.log(decoded,"decoded")
                 // (new Date).getTime() -> time in millisecond.
                 // return (new Date).getTime()<exp*1000// becasue exp in second . 
 
