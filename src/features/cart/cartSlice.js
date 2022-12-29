@@ -46,20 +46,3 @@ export const {
     removeItem,
     addPromoCode
 } = cartSlice.actions;
-
-
-
-// // src/pages/Home.js
-// const cart = useSelector((state) => state.cart)
-
-// const getTotalQuantity = () => {
-//   let total = 0
-//   cart.forEach(item => {
-//     total += item.quantity
-//   })
-//   return total
-// }
-{/* <div className='shopping-cart' onClick={() => navigate('/cart')}>
-  <ShoppingCart id='cartIcon'/>
-  <p>{getTotalQuantity() || 0}</p>
-</div> */}

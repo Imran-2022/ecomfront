@@ -15,6 +15,8 @@ import CreateProduct from "./component/product/CreateProduct";
 import Store from "./component/Store/Store";
 import ProductCard from "./component/card/ProductCard";
 import About from "./component/about/About";
+import Shipping from "./component/cart/Shapping";
+import Checkout from "./component/cart/Checkout";
 const Main = () => {
     return (
         <Routes>
@@ -23,6 +25,8 @@ const Main = () => {
             <Route path="/store" element={<Store />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
+            <Route path="/shipping" element={<Shipping />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/forget-password" element={<ResetPassword />} />
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
