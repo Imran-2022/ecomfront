@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAddnewProfileMutation, useGetProfileMutation } from '../../features/profile/profileApi';
 import Layout from '../../Layout';
 
 const Shipping = () => {
+  const navigate=  useNavigate()
+
     const [getProfile, { data, isLoading, isError, isSuccess }] = useGetProfileMutation();
     const [addnewProfile, { data: pdata, isLoading: pisLoading, isError: pisError, isSuccess: pisSuccess }] = useAddnewProfileMutation();
     const { profile: { user, phone, address1, address2, city, state, postCode, country } } = useSelector(state => state.profile)
@@ -21,7 +23,7 @@ const Shipping = () => {
     });
     useEffect(() => {
         getProfile()
-    }, [getProfile])
+    }, [])
 
     useEffect(() => {
         setInputs({
@@ -45,10 +47,8 @@ const Shipping = () => {
     const handleShapping = () => {
         console.log(inputs, "inputssssssssss");
         addnewProfile(inputs)
+    if (address1) navigate('/checkout')
     }
-    if (isLoading) return <p> is Loading !</p>
-    if (pdata) console.log(pdata)
-
     return (
         <Layout title="shipping page" className="mx-64">
             <div className="mt-12">
@@ -251,6 +251,7 @@ const Shipping = () => {
 
                         <div className="my-6 text-center">
                             <button
+                            disabled={pisLoading}
                                 onClick={handleShapping}
                                 className="
                                     w-5/12
