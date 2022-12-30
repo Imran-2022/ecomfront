@@ -17,6 +17,7 @@ import ProductCard from "./component/card/ProductCard";
 import About from "./component/about/About";
 import Shipping from "./component/cart/Shapping";
 import Checkout from "./component/cart/Checkout";
+import PaymentSuccessFull from "./dashboard/PaymentSuccessFull";
 const Main = () => {
     return (
         <Routes>
@@ -31,17 +32,17 @@ const Main = () => {
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
             <Route path="/product/:dt" element={<ProductCard />} />
-            
+
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<CreateProduct />} />
-            <Route path="create-category" element={<CreateCategory />} />
-
+                <Route index element={<CreateProduct />} />
+                <Route path="create-category" element={<CreateCategory />} />
+                <Route path="paid-product" element={<PaymentSuccessFull />} />
             </Route>
             {/* {
                 useAuth() && <Route path="/dashboard" element={<Dashboard />} />
             } */}
-             <Route path="/verify-email/:verificationString" element={<EmailVerificationLandingPage />} />
+            <Route path="/verify-email/:verificationString" element={<EmailVerificationLandingPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

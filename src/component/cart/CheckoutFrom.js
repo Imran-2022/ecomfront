@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { useCreatePaymentIntentMutation } from '../../features/payment/paymentApi';
+import { useAddPaymentCompletedProductToDSMutation, useCreatePaymentIntentMutation } from '../../features/payment/paymentApi';
 import { useGetCartItemMutation } from "../../features/cart/cartApi"
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutFrom = ({ getTotalCost }) => {
+    const navigate=useNavigate()
+	const { cart, promoCode } = useSelector((state) => state.cart);
+
     const stripe = useStripe()
     const elements = useElements();
     const [cartError, setCartError] = useState("")
     const [success, setSuccess] = useState("")
     const [clientSecret, setClientSecret] = useState("");
     const [createPaymentIntent, { data, isSuccess, isLoading, error, isError }] = useCreatePaymentIntentMutation()
+    const [addPaymentCompletedProductToDS, { data: savePayment, isSuccess: savedSuccess, isLoading: saveLoading, isError: savedError, error: saveError }] = useAddPaymentCompletedProductToDSMutation()
     const [getCartItem] = useGetCartItemMutation();
+    const [transactionId, setTransactionId] = useState("")
 
 
-   
     useEffect(() => {
         getCartItem()
     }, [getCartItem])
@@ -25,11 +31,11 @@ const CheckoutFrom = ({ getTotalCost }) => {
     if (error) console.log(error)
 
     useEffect(() => {
-       if(data?.clientSecret) setClientSecret(data.clientSecret)
+        if (data?.clientSecret) setClientSecret(data.clientSecret)
     }, [data])
 
 
- const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!stripe || !elements) {
             // Stripe.js has not loaded yet. Make sure to disable
@@ -51,27 +57,29 @@ const CheckoutFrom = ({ getTotalCost }) => {
         setSuccess("")
         // comfirm card Payment !!!!!
 
-        const {paymentIntent, error:intentError} = await stripe.confirmCardPayment(clientSecret,
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(clientSecret,
             {
-              payment_method: {
-                card: card,
-                billing_details: {
-                  name: 'Md Imranul Haque',
-                  email:'mdimranulhaque@gmail.com'
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: 'Md Imranul Haque',
+                        email: 'mdimranulhaque@gmail.com'
+                    },
                 },
-              },
             },
-          );
+        );
 
-          if(intentError) {
+        if (intentError) {
             setCartError(intentError.message)
-          }else{
+        } else {
             setCartError("")
-            console.log(paymentIntent,"paymentIntent")
+            setTransactionId(paymentIntent?.id)
             setSuccess(`Congrats ! Your $ ${paymentIntent.amount} Payment Is completed `)
-          }
+        }
 
+        if (paymentIntent?.id) addPaymentCompletedProductToDS({ transationId: paymentIntent?.id, productDetails: cart,totalAmount:getTotalCost})
     }
+    if (savePayment) navigate('/dashboard/paid-product')
 
     return (
         <form onSubmit={handleSubmit} className='pt-5'>
@@ -91,7 +99,7 @@ const CheckoutFrom = ({ getTotalCost }) => {
                     },
                 }}
             />
-            <button  type="submit" disabled={!stripe|| !clientSecret}>
+            <button type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             {
