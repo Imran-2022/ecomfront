@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useGetCategoryMutation } from '../../features/product/adminAPI';
-
+import { AiOutlineArrowRight } from 'react-icons/ai';
 import { addFilterCategory } from '../../features/filter/filterSlice';
 import { useDispatch } from 'react-redux';
 
@@ -21,9 +21,8 @@ const FilterByCategory = () => {
 
     return (
         <div>
-            <p>FilterByCategory</p>
             <div className="form-group">
-                <label className="text-muted">{categoryF && categoryF}</label>
+                {/* <label className="text-muted">{categoryF && categoryF}</label>
                 <select name="category" value={categoryF} onChange={e => setCategoryFilter(e.target.value)} className="form-control" required>
                 <option value="">----Select Category----</option>
                     
@@ -32,11 +31,11 @@ const FilterByCategory = () => {
 
                     }
                     
-                </select>
-                <p>Cagetory :</p>
+                </select> */}
+                <p className='py-3 underline'>Filter By Category -</p>
                 <ul>
                     {
-                        data && data.map((item,idx)=>(<li key={idx}>{idx+1}. {item.name}</li>))
+                        data && data.map((item,idx)=>(<li className='uppercase cursor-pointer flex gap-4 items-center' onClick={()=>setCategoryFilter(item._id)} key={idx}> <AiOutlineArrowRight/> {item.name}</li>))
                     }
                 </ul>
             </div>

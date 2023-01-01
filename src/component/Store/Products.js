@@ -53,20 +53,22 @@ const Products = () => {
     }, [modifiedData, dispatch])
 
     return (
-        <div className='m-12'>
-            <p className='text-center text-red-300 font-bold py-4 mb-4 bg-green-600'>Here ALL Products = {TotalData?.total} </p>
-            <div className='grid grid-cols-5'>
-                <FilterProduct />
-
-                <div className='col-span-4'>
-                    <div className='flex flex-wrap justify-center items-center gap-5'>
+        <div className='bg-[#f5f7f9] hidden md:block pb-10'>
+            <div className='min-h-[70vh]  grid grid-cols-4 mx-52 py-8'>
+                <div className='p-3 border'>
+                    <FilterProduct />
+                </div>
+                <div className='col-span-3  border'>
+                    <div className='bg-white min-h-[70vh] p-12 grid grid-cols-3 gap-3 justify-center items-start border'>
                         {
                             modifiedDataa?.map(dt => <ProductsCard key={dt._id} dt={dt} />)
                         }
                     </div>
+                    <div className='bg-white min-h-[6vh] p-3 flex justify-end px-12 border'>
+                        <Pagination />
+                    </div>
                 </div>
             </div>
-            <Pagination />
         </div>
     );
 };

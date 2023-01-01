@@ -7,7 +7,6 @@ const FilterProduct = () => {
     return (
         <div>
             <ResetFilter/>
-            <p>filter Product According to Your Choice !</p>
             <SearchProduct/>
             <FilterByPrice/>
             <FilterByCategory/>

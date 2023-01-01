@@ -14,14 +14,19 @@ const FilterByPrice = () => {
     setPrice((pricseFilter?.filterPrice))
   }, [])
   return (
-    <div>
-      <p>Filter By Price</p>
-      <input type="range" list="tickmarks" value={price} min={MinValue} max={MaxValue} onChange={e => setPrice(e.target.value)} className="w-full" />
-      <button type="button" className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" onClick={() => dispatch(addFilterPrice(price))}>Filter</button> 
-      {
-        MinValue&& MaxValue && <span>Price: ${MinValue} — ${price?price:MaxValue}</span>
-      }
-    </div>
+      <div>
+        <p className='py-1'>Filter By Price -</p>
+        <input type="range" list="tickmarks" value={price} min={MinValue} max={MaxValue} onChange={e => setPrice(e.target.value)} className="w-full" />
+        <div className='flex flex-row gap-3 justify-between items-center my-3'>
+          <button type="button" className="inline-block bg-blue-600 text-white py-0.5 px-6 font-bold" onClick={() => dispatch(addFilterPrice(price))}>Filter</button>
+          <div>
+            {
+              MinValue && MaxValue && <span>${MinValue} — ${price ? price : MaxValue}</span>
+            }
+          </div>
+        </div>
+
+      </div>
   );
 };
 

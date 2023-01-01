@@ -6,7 +6,7 @@ const initialState = {
     filterCategory: "",
     pagination: {
         currentPage: 1,
-        limit: 5,
+        limit: 3,
         totalCount: 1,
     },
 };

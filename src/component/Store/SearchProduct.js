@@ -33,7 +33,7 @@ const optimizedVersion =useCallback(debounce(HandleSearch),[])
           <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </button>
       </span>
-      <input type="search" name="q" onChange={optimizedVersion} className="py-2 font-bold text-sm  bg-orange-300  rounded-md pl-10 focus:outline-orange-300 focus:bg-white focus:text-gray-900 text-white" placeholder="Search..." autoComplete="off" />
+      <input type="search" name="q" onChange={optimizedVersion} className="py-2 font-bold text-sm border-2  border-orange-300  rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900 text-white w-full" placeholder="Search..." autoComplete="off" />
     </div>
   );
 };
