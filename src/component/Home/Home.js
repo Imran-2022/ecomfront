@@ -7,7 +7,7 @@ const Home = () => {
     // <p>{process.env.REACT_APP_HELLO_MESSAGE}</p>
 
     return (
-        <Layout title="Home Page" className='py-6'>
+        <Layout title="Home Page" className='py-6 h-screen'>
             <section className="bg-white dark:bg-gray-900">
                 <div className="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="place-self-center mr-auto lg:col-span-7">
