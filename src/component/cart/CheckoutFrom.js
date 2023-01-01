@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const CheckoutFrom = ({ getTotalCost }) => {
-    const navigate=useNavigate()
-	const { cart, promoCode } = useSelector((state) => state.cart);
+    const navigate = useNavigate()
+    const { cart, promoCode } = useSelector((state) => state.cart);
 
     const stripe = useStripe()
     const elements = useElements();
@@ -77,13 +77,13 @@ const CheckoutFrom = ({ getTotalCost }) => {
             setSuccess(`Congrats ! Your $ ${paymentIntent.amount} Payment Is completed `)
         }
 
-        if (paymentIntent?.id) addPaymentCompletedProductToDS({ transationId: paymentIntent?.id, productDetails: cart,totalAmount:getTotalCost})
+        if (paymentIntent?.id) addPaymentCompletedProductToDS({ transationId: paymentIntent?.id, productDetails: cart, totalAmount: getTotalCost })
     }
     if (savePayment) navigate('/dashboard/paid-product')
 
     return (
         <form onSubmit={handleSubmit} className='pt-5'>
-            <CardElement className='py-3 px-1 border border-red-400'
+            <CardElement className='py-3 px-1  border focus:outline-none font-semibold p-2 block w-full mt-1 border-gray-300 rounded-md shadow-smfocus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"'
                 options={{
                     style: {
                         base: {
@@ -99,9 +99,7 @@ const CheckoutFrom = ({ getTotalCost }) => {
                     },
                 }}
             />
-            <button type="submit" disabled={!stripe || !clientSecret}>
-                Pay
-            </button>
+            <button type="submit" disabled={!stripe || !clientSecret} className="mt-3 flex items-center justify-center bg-blue-600 text-sm font-medium w-full h-10 rounded text-blue-50 hover:bg-blue-700">Make Payment !</button>
             {
                 cartError && <p>{cartError}</p>
             }

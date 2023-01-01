@@ -50,10 +50,11 @@ const Shipping = () => {
     if (address1) navigate('/checkout')
     }
     return (
-        <Layout title="shipping page" className="mx-64">
-            <div className="mt-12">
-                <div className="p-6 border border-gray-300 sm:rounded-md">
-                    <form onSubmit={e => e.preventDefault()}>
+        <Layout title="shipping page" className=" bg-[#f5f7f9] min-h-[92vh] grid items-center">
+            <div className='mx-64 '>
+            <div className="py-6">
+                <div className="p-6 border bg-slate-50 border-gray-300 sm:rounded-md">
+                    <form onSubmit={e => e.preventDefault()} className="capitalize">
                         <div className='flex flex-wrap gap-5 justify-around'>
                             <div>
                                 <label className="block mb-6">
@@ -62,6 +63,10 @@ const Shipping = () => {
                                         name="name"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                        p-2
                                         block
                                         w-full
                                         mt-1
@@ -82,6 +87,10 @@ const Shipping = () => {
                                         name="address1"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                        p-2
                                         block
                                         w-full
                                         mt-1
@@ -102,6 +111,10 @@ const Shipping = () => {
                                         name="address2"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                            p-2 
                                             block
                                             w-full
                                             mt-1
@@ -123,6 +136,10 @@ const Shipping = () => {
                                         name="city"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                            p-2
                                             block
                                             w-full
                                             mt-1
@@ -147,6 +164,10 @@ const Shipping = () => {
                                         name="state"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                            p-2
                                             block
                                             w-full
                                             mt-1
@@ -168,6 +189,10 @@ const Shipping = () => {
                                         name="postCode"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                            p-2
                                             block
                                             w-full
                                             mt-1
@@ -189,6 +214,10 @@ const Shipping = () => {
                                         name="country"
                                         type="text"
                                         className="
+                                        border
+                                        focus:outline-none
+                                        font-semibold
+                                                p-2
                                                 block
                                                 w-full
                                                 mt-1
@@ -204,12 +233,16 @@ const Shipping = () => {
                                         value={inputs.country} onChange={handleChange} required
                                     />
                                 </label>
-                                <label className="block mb-6">
+                                <label className="block mb-6 ">
                                     <span className="text-gray-700">mobile/telephone</span>
                                     <input
                                         name="phone"
                                         type="text"
                                         className="
+                                                border
+                                                focus:outline-none
+                                                font-semibold
+                                                p-2
                                                 block
                                                 w-full
                                                 mt-1
@@ -225,26 +258,6 @@ const Shipping = () => {
                                         value={inputs.phone} onChange={handleChange} required
                                     />
                                 </label>
-                                {/* <label className="block mb-6">
-                                    <span className="text-gray-700">Delivery information</span>
-                                    <textarea
-                                        name="message"
-                                        className="
-                                                block
-                                                w-full
-                                                mt-1
-                                                border-gray-300
-                                                rounded-md
-                                                shadow-sm
-                                                focus:border-indigo-300
-                                                focus:ring
-                                                focus:ring-indigo-200
-                                                focus:ring-opacity-50
-          "
-                                        rows="3"
-                                        placeholder="floor/door lock code/etc."
-                                    ></textarea>
-                                </label> */}
                             </div>
                         </div>
 
@@ -270,6 +283,7 @@ const Shipping = () => {
                         </div>
                     </form>
                 </div>
+            </div>
             </div>
         </Layout>
     );
