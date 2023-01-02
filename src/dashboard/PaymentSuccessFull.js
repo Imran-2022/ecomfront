@@ -15,20 +15,21 @@ const PaymentSuccessFull = () => {
 
     return (
         <div>
-            <p>Your payment History is here !!!! GoodLuck ....</p>
+            <p className='underline ml-3'>Your latest 5 payment History is here !!</p>
             {
                 paymentCompleted && paymentCompleted.map(dt =>
-                    <div className='bg-slate-400 p-4 m-3'>
-                        <p>transationId : {dt.transationId}</p>
+                    <div className='p-4 m-3 shadow border-2 '>
+                        <div className='flex justify-between gap-4'>
+                            <p>transationId : {dt.transationId}</p>
+                            <p>Total Price : {dt.totalAmount}</p>
+                        </div>
                         {
                             dt.productDetails.map(dt => <div>
                                 <p>product:{dt.product.name},price: {dt.price}, count: {dt.count}</p>
                             </div>)
                         }
-                        <p>Total Price : {dt.totalAmount}</p>
-                        <p>userID : {dt.user}</p>
                     </div>
-                )
+                ).reverse().slice(0, 4)
             }
         </div>
     );

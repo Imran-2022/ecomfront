@@ -37,9 +37,8 @@ const Main = () => {
             <Route path="/product/:dt" element={<ProductCard />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard" element={<DashboardMain />}>
-                <Route path="productm" element={<CreateProduct />} />
+                <Route index element={<CreateProductDashboard />} />
                 <Route path="create-categorydashboard" element={<CreateCategoryDashboard />} />
-                <Route path="create-product" element={<CreateProductDashboard />} />
                 <Route path="create-categorym" element={<CreateCategory />} />
                 <Route path="paid-product" element={<PaymentSuccessFull />} />
             </Route>

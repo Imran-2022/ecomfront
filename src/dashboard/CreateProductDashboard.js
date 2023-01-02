@@ -143,6 +143,7 @@ const CreateProductDashboard = () => {
                     focus:ring
                     focus:ring-indigo-200
                     focus:ring-opacity-50"
+                    placeholder='product price here'
                     name="price"
                     onChange={handleChange}
                     type="number"
@@ -168,6 +169,7 @@ const CreateProductDashboard = () => {
                     focus:ring
                     focus:ring-indigo-200
                     focus:ring-opacity-50"
+                    placeholder='product quantity here'
                     name="quantity"
                     onChange={handleChange}
                     type="number"
