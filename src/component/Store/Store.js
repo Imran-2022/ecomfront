@@ -4,7 +4,7 @@ import Products from './Products';
 
 const Store = () => {
     return (
-        <Layout title='Store'>
+        <Layout title='Store' className='break-words'>
             <Products/>
         </Layout>
     );

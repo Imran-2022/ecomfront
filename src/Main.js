@@ -6,7 +6,6 @@ import ResetPassword from "./component/Auth/reset/ResetPassword"
 import Cart from "./component/cart/Cart";
 import NotFound from "./component/ui/NotFound";
 import Dashboard from "./component/user/Dashboard";
-import useAuth from "./hooks/useAuth";
 import NewPasswordLandingPage from "./component/Auth/reset/NewPasswordLandingPage";
 import { EmailVerificationLandingPage } from "./component/Auth/verify/EmailVerificationLandingPage";
 import { PleaseVerifyEmailPage } from "./component/Auth/verify/PleaseVerifyEmail";
@@ -18,6 +17,9 @@ import About from "./component/about/About";
 import Shipping from "./component/cart/Shapping";
 import Checkout from "./component/cart/Checkout";
 import PaymentSuccessFull from "./dashboard/PaymentSuccessFull";
+import DashboardMain from "./dashboard/DashboardMain";
+import CreateCategoryDashboard from "./dashboard/CreateCategoryDashboard";
+import CreateProductDashboard from "./dashboard/CreateProductDashboard";
 const Main = () => {
     return (
         <Routes>
@@ -29,14 +31,16 @@ const Main = () => {
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/forget-password" element={<ResetPassword />} />
+            <Route path="/dashboardm" element={<Dashboard />} />
             <Route path="/new-password/:npassword" element={<NewPasswordLandingPage />} />
             <Route path="/verify-email" element={<PleaseVerifyEmailPage />} />
             <Route path="/product/:dt" element={<ProductCard />} />
-
             <Route path="/cart" element={<Cart />} />
-            <Route path="/dashboard" element={<Dashboard />}>
-                <Route index element={<CreateProduct />} />
-                <Route path="create-category" element={<CreateCategory />} />
+            <Route path="/dashboard" element={<DashboardMain />}>
+                <Route path="productm" element={<CreateProduct />} />
+                <Route path="create-categorydashboard" element={<CreateCategoryDashboard />} />
+                <Route path="create-product" element={<CreateProductDashboard />} />
+                <Route path="create-categorym" element={<CreateCategory />} />
                 <Route path="paid-product" element={<PaymentSuccessFull />} />
             </Route>
             {/* {

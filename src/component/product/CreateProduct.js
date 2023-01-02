@@ -117,19 +117,13 @@ const CreateProduct = () => {
         </form>
     );
 
-    const goBack = () => (<div className="mt-5">
-        
-        {/* <button className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700" ><Link to="/dashboard" className="text-warning">Go to Dashboard</Link></button> */}
-    </div>)
 
 
     return (
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {productForm()}
-                    {goBack()}
-
-                    {ss&& <p>successfully uploaded bro</p>}
+                    {ss&& <p>yea, successfully uploaded !</p>}
                 </div>
             </div>
     );
