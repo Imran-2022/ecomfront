@@ -11,6 +11,7 @@ const Products = () => {
     const [getProducts, { data, isLoading, error: responseError, isSuccess }] = useGetProductsMutation();
     const [getTotalOfProduct, { data: TotalData }] = useGetTotalOfProductMutation();
     const { search, filterPrice, filterCategory, pagination } = useSelector(state => state.filter)
+    const { products } = useSelector(state => state.admin)
     const { currentPage, limit } = pagination;
     const [order, setOrder] = useState('desc')
     const [sortBy, setSortBy] = useState('createAt')
@@ -46,8 +47,8 @@ const Products = () => {
     //     dispatch(setTotalCount(data?.length))
     // },[data,dispatch])
 
-    const modifiedData = data && data.filter(searchFilter).filter(byPriceRange).filter(byCategory)
-    const modifiedDataa = data && data.filter(searchFilter).filter(byPriceRange).filter(byCategory).slice((currentPage - 1) * limit, (currentPage * limit))
+    const modifiedData = products && products.filter(searchFilter).filter(byPriceRange).filter(byCategory)
+    const modifiedDataa = products && products.filter(searchFilter).filter(byPriceRange).filter(byCategory).slice((currentPage - 1) * limit, (currentPage * limit))
     useEffect(() => {
         if (modifiedData) dispatch(setTotalCount(modifiedData?.length))
     }, [modifiedData, dispatch])
